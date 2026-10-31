@@ -1,0 +1,137 @@
+:root {
+  --sfondo: #f6f5f1;
+  --superficie: #ffffff;
+  --testo: #1d1c1a;
+  --tenue: #6b6862;
+  --bordo: #e2dfd8;
+  --accento: #b4552f;
+  --accento-testo: #ffffff;
+  --accento-tenue: #f3e3db;
+  --ok: #2f7a4f;
+  --raggio: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sfondo: #161514;
+    --superficie: #201f1d;
+    --testo: #ecebe7;
+    --tenue: #a19d95;
+    --bordo: #34322e;
+    --accento: #e07a50;
+    --accento-testo: #1a0f0a;
+    --accento-tenue: #3a261d;
+    --ok: #6cc08f;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 15px/1.5 "Segoe UI", system-ui, sans-serif;
+  background: var(--sfondo);
+  color: var(--testo);
+}
+main { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
+h1 { margin: 0; font-size: 26px; letter-spacing: -0.01em; }
+h2 { margin: 0 0 10px; font-size: 17px; display: flex; align-items: center; gap: 10px; }
+code { background: var(--accento-tenue); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+
+.testata {
+  max-width: 1200px; margin: 0 auto; padding: 28px 20px 18px;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap;
+}
+.sottotitolo, .nota { color: var(--tenue); margin: 6px 0; }
+.pillola {
+  border: 1px solid var(--bordo); background: var(--superficie);
+  padding: 5px 12px; border-radius: 999px; font-size: 13px; color: var(--tenue); white-space: nowrap;
+}
+.pillola.ok { color: var(--ok); border-color: var(--ok); }
+.pillola.demo { color: var(--accento); border-color: var(--accento); }
+
+.passo {
+  background: var(--superficie); border: 1px solid var(--bordo); border-radius: var(--raggio);
+  padding: 18px 20px; margin-bottom: 14px;
+}
+.passo[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.numero {
+  display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accento); color: var(--accento-testo); font-size: 13px;
+}
+.avviso {
+  background: var(--accento-tenue); border: 1px solid var(--accento); border-radius: var(--raggio);
+  padding: 12px 16px; margin-bottom: 14px;
+}
+
+.riga { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.riga.spaziata { justify-content: space-between; }
+.riga.destra { justify-content: flex-end; }
+.spunta { display: inline-flex; gap: 6px; align-items: center; color: var(--tenue); cursor: pointer; }
+
+button {
+  font: inherit; border: 1px solid var(--accento); background: var(--accento); color: var(--accento-testo);
+  padding: 8px 16px; border-radius: 8px; cursor: pointer;
+}
+button:hover:not(:disabled) { filter: brightness(1.07); }
+button:disabled { opacity: 0.45; cursor: default; }
+button.secondario { background: transparent; color: var(--testo); border-color: var(--bordo); }
+button.secondario:hover:not(:disabled) { border-color: var(--tenue); filter: none; }
+button.piccolo { padding: 4px 10px; font-size: 13px; }
+
+.barra { height: 8px; background: var(--bordo); border-radius: 99px; overflow: hidden; margin: 10px 0; }
+.barra > div { height: 100%; width: 0; background: var(--accento); transition: width 0.2s; }
+
+.schede { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 12px; }
+.scheda {
+  background: var(--superficie); color: var(--testo); border: 1px solid var(--bordo);
+  padding: 6px 12px; border-radius: 999px; font-size: 14px;
+}
+.scheda .conteggio { color: var(--tenue); margin-left: 6px; font-variant-numeric: tabular-nums; }
+.scheda[aria-selected="true"] { background: var(--testo); color: var(--sfondo); border-color: var(--testo); }
+.scheda[aria-selected="true"] .conteggio { color: inherit; opacity: 0.7; }
+
+.strumenti {
+  display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;
+  position: sticky; top: 0; background: var(--sfondo); padding: 8px 0; z-index: 2;
+}
+
+.griglia { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.tessera {
+  position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; cursor: pointer;
+  background: var(--bordo); border: 3px solid transparent; padding: 0;
+}
+.tessera img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tessera.selezionata { border-color: var(--accento); }
+.tessera .spunta-tessera {
+  position: absolute; top: 6px; left: 6px; width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(0,0,0,0.45); border: 2px solid #fff; display: grid; place-items: center;
+  color: #fff; font-size: 13px;
+}
+.tessera.selezionata .spunta-tessera { background: var(--accento); border-color: var(--accento); }
+.tessera .info {
+  position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(0,0,0,0.55); color: #fff; border: none; padding: 0; font-size: 13px;
+}
+.tessera .etichetta {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 5px; font-size: 12px; color: #fff;
+  background: linear-gradient(transparent, rgba(0,0,0,0.65)); text-align: left;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tessera.spostata { opacity: 0.35; cursor: default; }
+.altre { display: block; margin: 16px auto 0; }
+
+dialog {
+  border: 1px solid var(--bordo); border-radius: var(--raggio); background: var(--superficie); color: var(--testo);
+  padding: 20px; max-width: min(900px, 94vw);
+}
+dialog::backdrop { background: rgba(0,0,0,0.5); }
+.dettaglio { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(220px, 1fr); gap: 20px; }
+.dettaglio img { width: 100%; max-height: 70vh; object-fit: contain; background: var(--sfondo); border-radius: 8px; }
+.det-info { display: flex; flex-direction: column; gap: 10px; }
+.det-info h3 { margin: 0; word-break: break-all; font-size: 16px; }
+.det-info h4 { margin: 6px 0 0; font-size: 14px; }
+select { font: inherit; padding: 6px; border-radius: 6px; border: 1px solid var(--bordo); background: var(--sfondo); color: var(--testo); display: block; width: 100%; margin-top: 4px; }
+.tag { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 5px; }
+.tag li { background: var(--accento-tenue); padding: 2px 8px; border-radius: 99px; font-size: 12px; }
+@media (max-width: 640px) { .dettaglio { grid-template-columns: 1fr; } }

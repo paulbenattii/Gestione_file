@@ -1,0 +1,8 @@
+Metti qui i file del modello Eye, scaricati da https://huggingface.co/desert-ant-labs/eye
+(serve l'accesso alla beta, vedi LEGGIMI.md nella cartella principale):
+
+  eye.tflite       (circa 66 MB)
+  eye_meta.json    (circa 76 KB)
+
+Il file eye.mlmodelc NON serve: è la versione per Mac/iPhone.
+Quando i due file sono qui, l'app li carica da sola e funziona offline.

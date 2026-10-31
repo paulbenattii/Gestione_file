@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Riordina foto</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="testata">
+      <div>
+        <h1>Riordina foto</h1>
+        <p class="sottotitolo">Classifica le foto di una cartella sul tuo PC. Nessuna immagine esce dal computer.</p>
+      </div>
+      <span id="stato-modello" class="pillola">Modello: controllo…</span>
+    </header>
+
+    <main>
+      <div id="avviso-browser" class="avviso" hidden>
+        Questo browser non permette di aprire cartelle. Usa <strong>Chrome</strong> o <strong>Edge</strong>.
+      </div>
+
+      <section id="passo-modello" class="passo">
+        <h2><span class="numero">1</span> Modello</h2>
+        <p id="testo-modello">Controllo se i file del modello Eye sono presenti…</p>
+        <div id="barra-modello" class="barra" hidden><div></div></div>
+        <div id="modello-mancante" hidden>
+          <p class="nota">
+            Metti <code>eye.tflite</code> e <code>eye_meta.json</code> in <code>public/models/eye/</code>
+            (istruzioni nel file LEGGIMI.md) e ricarica la pagina.
+          </p>
+          <button id="btn-demo" class="secondario">Prova l'interfaccia in modalità demo</button>
+        </div>
+      </section>
+
+      <section id="passo-cartella" class="passo" aria-disabled="true">
+        <h2><span class="numero">2</span> Cartella</h2>
+        <div class="riga">
+          <button id="btn-cartella">Scegli cartella…</button>
+          <label class="spunta"><input type="checkbox" id="chk-sottocartelle" /> Includi le sottocartelle</label>
+        </div>
+        <p id="testo-cartella" class="nota">Nessuna cartella scelta.</p>
+        <button id="btn-analizza" disabled>Avvia analisi</button>
+      </section>
+
+      <section id="passo-analisi" class="passo" hidden>
+        <h2><span class="numero">3</span> Analisi</h2>
+        <div id="barra-analisi" class="barra"><div></div></div>
+        <div class="riga spaziata">
+          <p id="testo-analisi">—</p>
+          <button id="btn-ferma" class="secondario">Ferma</button>
+        </div>
+      </section>
+
+      <section id="risultati" hidden>
+        <nav id="schede" class="schede" aria-label="Categorie"></nav>
+        <div class="strumenti">
+          <div class="riga">
+            <button id="btn-tutte" class="secondario piccolo">Seleziona tutte</button>
+            <button id="btn-nessuna" class="secondario piccolo">Deseleziona tutte</button>
+            <span id="testo-scheda" class="nota"></span>
+          </div>
+          <div class="riga">
+            <button id="btn-csv" class="secondario">Esporta CSV</button>
+            <button id="btn-sposta">Sposta selezionate</button>
+          </div>
+        </div>
+        <div id="griglia" class="griglia"></div>
+        <button id="btn-altre" class="secondario altre" hidden>Mostra altre</button>
+      </section>
+    </main>
+
+    <dialog id="dettaglio">
+      <form method="dialog" class="dettaglio">
+        <img id="det-img" alt="" />
+        <div class="det-info">
+          <h3 id="det-nome"></h3>
+          <p id="det-provenienza" class="nota"></p>
+          <label>Categoria
+            <select id="det-categoria"></select>
+          </label>
+          <label class="spunta"><input type="checkbox" id="det-selezionata" /> Da spostare</label>
+          <h4>Tag riconosciuti</h4>
+          <ul id="det-tag" class="tag"></ul>
+          <button value="chiudi">Chiudi</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="conferma">
+      <form method="dialog">
+        <h3>Spostare le foto?</h3>
+        <p id="conf-testo"></p>
+        <ul id="conf-elenco"></ul>
+        <p class="nota">Niente viene cancellato: le foto finiscono in sottocartelle di <code>_classificate</code>.</p>
+        <div class="riga destra">
+          <button value="annulla" class="secondario">Annulla</button>
+          <button value="ok" id="conf-ok">Sposta</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+node_modules/
+dist/
+public/litert-wasm/
+public/models/eye/*.tflite
+public/models/eye/*.json
