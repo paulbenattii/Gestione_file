@@ -53,7 +53,44 @@
       </section>
 
       <section id="risultati" hidden>
+        <details class="aiuto">
+          <summary>Come si usa la revisione</summary>
+          <ol>
+            <li><strong>Schede:</strong> ogni scheda è una categoria. Clic su una foto = la selezioni o la togli
+              dalla selezione. La <strong>i</strong> apre tutta l'analisi della foto e ti fa cambiare categoria a mano.</li>
+            <li><strong>Spostare:</strong> "Sposta tutte le…" sposta l'intera scheda aperta in
+              <code>_classificate/&lt;categoria&gt;</code>; "Sposta selezionate" sposta le foto spuntate di tutte le schede.
+              Niente viene cancellato: le cancelli tu da lì, dopo averle guardate.</li>
+            <li><strong>Trova foto simili</strong>, per ciò che il modello non riconosce da solo (per esempio le
+              lavagne d'ardesia col gesso, che Eye non ha come categoria):
+              <ol>
+                <li>trova <em>una</em> foto di quel tipo, in qualsiasi scheda, e aprila con la <strong>i</strong>;</li>
+                <li>premi <strong>Trova foto simili</strong>: compaiono tutte le foto ordinate da quella più simile, con la
+                  percentuale di somiglianza su ognuna;</li>
+                <li>muovi la <strong>somiglianza minima</strong> finché la griglia mostra quasi solo foto giuste
+                  (più alta = meno foto ma più sicure), poi togli la spunta a quelle sbagliate;</li>
+                <li>scegli la categoria (es. <em>Lavagne</em>) e premi <strong>Metti in questa categoria</strong>;</li>
+                <li>se ne mancano, apri un'altra foto giusta che non era uscita e ripeti: ogni ricerca aggiunge alla categoria.</li>
+              </ol>
+            </li>
+          </ol>
+        </details>
         <nav id="schede" class="schede" aria-label="Categorie"></nav>
+        <div id="pannello-simili" class="pannello-simili" hidden>
+          <p id="simili-testo"></p>
+          <div class="riga">
+            <label class="soglia">Somiglianza minima
+              <input type="range" id="simili-soglia" min="50" max="98" step="1" />
+              <span id="simili-valore"></span>
+            </label>
+          </div>
+          <div class="riga">
+            <label class="riga">Metti le foto spuntate in <select id="simili-categoria"></select></label>
+            <button id="btn-simili-assegna">Metti in questa categoria</button>
+            <button id="btn-simili-chiudi" class="secondario">Chiudi ricerca</button>
+          </div>
+          <p class="nota">Abbassa la soglia per vedere più foto, alzala se ne compaiono di sbagliate. Solo le foto spuntate e visibili cambiano categoria.</p>
+        </div>
         <div class="strumenti">
           <div class="riga">
             <button id="btn-tutte" class="secondario piccolo">Seleziona tutte</button>
@@ -62,6 +99,7 @@
           </div>
           <div class="riga">
             <button id="btn-csv" class="secondario">Esporta CSV</button>
+            <button id="btn-sposta-categoria" class="secondario" hidden>Sposta tutta la categoria</button>
             <button id="btn-sposta">Sposta selezionate</button>
           </div>
         </div>
@@ -80,8 +118,9 @@
             <select id="det-categoria"></select>
           </label>
           <label class="spunta"><input type="checkbox" id="det-selezionata" /> Da spostare</label>
-          <h4>Tag riconosciuti</h4>
-          <ul id="det-tag" class="tag"></ul>
+          <button type="button" id="det-simili" class="secondario">Trova foto simili</button>
+          <p class="nota">Mostra le foto che somigliano a questa, per metterle tutte insieme in una categoria.</p>
+          <div id="det-analisi" class="det-analisi"></div>
           <button value="chiudi">Chiudi</button>
         </div>
       </form>

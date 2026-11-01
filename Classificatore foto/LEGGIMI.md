@@ -38,14 +38,32 @@ Da quel momento l'app non ha più bisogno di Hugging Face né di un token: il mo
 1. **Modello**: l'app controlla se i file sono in `public/models/eye/` e li carica. Usa la scheda
    video (WebGPU) se disponibile, altrimenti la CPU.
 2. **Cartella**: scegli la cartella delle foto (ed eventualmente le sottocartelle).
-3. **Analisi**: per ogni immagine Eye assegna i tag; l'EXIF dice se è stata scattata con la
-   fotocamera o ricevuta (WhatsApp e Instagram tolgono l'EXIF).
+3. **Analisi**: Eye calcola tutto ciò che sa (tipo di immagine, qualità, nitidezza, bellezza,
+   persone, volti ed espressioni, animali, scene, contenuti sensibili); l'EXIF dice se è stata
+   scattata con la fotocamera o ricevuta (WhatsApp e Instagram tolgono l'EXIF). Alla fine le foto
+   quasi uguali scattate a pochi secondi di distanza finiscono in "Doppioni", tranne la migliore.
 4. **Revisione**: una scheda per categoria. Clic su una foto = selezionata/non selezionata.
-   La "i" apre i dettagli, dove puoi cambiare categoria a mano. Le "Foto tue" non sono selezionate
-   di default.
+   La "i" apre i dettagli con tutta l'analisi, e lì puoi cambiare categoria a mano. Le "Foto tue"
+   non sono selezionate di default.
 5. **Sposta selezionate**: le foto finiscono in `_classificate/<categoria>`. Da lì le guardi e
    cancelli tu quello che non vuoi.
 6. **Esporta CSV**: report apribile in Excel (separatore `;`).
+
+## Trovare le foto che il modello non riconosce
+
+Eye ha un elenco fisso di tipi di immagine: per esempio conosce la lavagna bianca (`whiteboard`) ma
+non la lavagna d'ardesia col gesso. Per questi casi c'è **Trova foto simili**:
+
+1. trova *una* foto di quel tipo, in qualsiasi scheda, e aprila con la **i**;
+2. premi **Trova foto simili**: la griglia mostra le foto ordinate dalla più simile, con la
+   percentuale di somiglianza su ognuna;
+3. regola la **somiglianza minima** (si parte dal 70%): più alta = meno foto ma più sicure;
+4. togli la spunta a quelle sbagliate, scegli la categoria (es. *Lavagne*) e premi
+   **Metti in questa categoria**;
+5. se ne mancano, apri un'altra foto giusta rimasta fuori e ripeti.
+
+Poi dalla scheda della categoria usi **Sposta tutte le…** come al solito. La stessa spiegazione è
+nella pagina, nel riquadro "Come si usa la revisione".
 
 ## Le categorie
 
